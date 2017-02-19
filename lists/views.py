@@ -6,10 +6,8 @@ from .models import Item
 def home_page(request):
     if request.method == 'POST':
         Item.objects.create(text=request.POST['item_text'])
-        return redirect('/')
-
-    items = Item.objects.all()
-    return render(request, 'lists/home.html', {'items': items})
+        return redirect('/lists/the-only-list-in-the-world/')
+    return render(request, 'lists/home.html')
 
     # else:
     #     new_item_text = ''
@@ -22,3 +20,8 @@ def home_page(request):
     # return render(request, 'lists/home.html', {
     #     'new_item_text': new_item_text,
     # })
+
+
+def view_list(request):
+    items = Item.objects.all()
+    return render(request, 'lists/list.html', {'items': items})
